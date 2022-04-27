@@ -9,6 +9,7 @@ public class Controller {
 
     public static void control(){
 
+        label:
         while (true){
             String cont = scanner.nextLine();
 
@@ -16,40 +17,49 @@ public class Controller {
                 Tradesman.shop();
             }
 
-            if(cont.equals("/help")){
-                System.out.println("m - Map legend");
-                System.out.println("i - Inventory");
-                System.out.println("j - Characteristics");
-                System.out.println("w - Move UP");
-                System.out.println("s - Move DOWN");
-                System.out.println("a - Move LEFT");
-                System.out.println("d - Move RIGHT");
-                System.out.println("/exit - Close game");
-            }else if(cont.equals("m")){
-                System.out.println("'H' - Hero");
-                System.out.println("'TM' - Tradesman");
-                //System.out.println("'G' - Goblin");
-                //System.out.println("'S' - Skeleton");
-                //System.out.println("'A' - Artifact");
-            }else if(cont.equals("i")){
-                if(Inventory.inventory.isEmpty()){
-                    System.out.println("Inventory is empty!");
-                }else {
-                    Inventory.inventory.forEach(item -> System.out.println(item.toString()));
-                }
-            }else if(cont.equals("j")){
-                System.out.println(Game.hero.toString());
-            }else if(cont.equals("/exit")){
-                System.out.println("GAME OVER");
-                break;
-            }else if(cont.equals("w")){ // вперед
-                Move.moveUp();
-            }else if(cont.equals("s")){ // назад
-                Move.moveDown();
-            }else if(cont.equals("a")){ // влево
-                Move.moveLeft();
-            }else if(cont.equals("d")){ // вправо
-                Move.moveRight();
+            switch (cont) {
+                case "/help":
+                    System.out.println("m - Map legend");
+                    System.out.println("i - Inventory");
+                    System.out.println("j - Characteristics");
+                    System.out.println("w - Move UP");
+                    System.out.println("s - Move DOWN");
+                    System.out.println("a - Move LEFT");
+                    System.out.println("d - Move RIGHT");
+                    System.out.println("/exit - Close game");
+                    break;
+                case "m":
+                    System.out.println("'H' - Hero");
+                    System.out.println("'TM' - Tradesman");
+                    //System.out.println("'G' - Goblin");
+                    //System.out.println("'S' - Skeleton");
+                    //System.out.println("'A' - Artifact");
+                    break;
+                case "i":
+                    if (Inventory.inventory.isEmpty()) {
+                        System.out.println("Inventory is empty!");
+                    } else {
+                        Inventory.inventory.forEach(item -> System.out.println(item.toString()));
+                    }
+                    break;
+                case "j":
+                    System.out.println(Game.hero.toString());
+                    break;
+                case "/exit":
+                    System.out.println("GAME OVER");
+                    break label;
+                case "w":  // вперед
+                    Move.moveUp();
+                    break;
+                case "s":  // назад
+                    Move.moveDown();
+                    break;
+                case "a":  // влево
+                    Move.moveLeft();
+                    break;
+                case "d":  // вправо
+                    Move.moveRight();
+                    break;
             }
         }
     }

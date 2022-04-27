@@ -28,16 +28,10 @@ public class Game {
         System.out.println("2. Rogue (HP 75, STR 75, AGL 100)");
         System.out.println("3. Killer (HP 50, STR 150, AGL 50)");
         gameClass = Integer.parseInt(scanner.nextLine());
-        switch (gameClass){
-            case 1:
-                Class.tank(nameHero);
-                break;
-            case 2:
-                Class.rogue(nameHero);
-                break;
-            case 3:
-                Class.killer(nameHero);
-                break;
+        switch (gameClass) {
+            case 1 -> Class.tank(nameHero);
+            case 2 -> Class.rogue(nameHero);
+            case 3 -> Class.killer(nameHero);
         }
         System.out.println(hero.toString());
         System.out.println("/help for to view commands.");
