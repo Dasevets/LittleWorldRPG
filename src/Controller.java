@@ -17,7 +17,7 @@ public class Controller {
             }
 
             if(cont.equals("/help")){
-                System.out.println("m - Map");
+                System.out.println("m - Map legend");
                 System.out.println("i - Inventory");
                 System.out.println("j - Characteristics");
                 System.out.println("w - Move UP");
@@ -26,8 +26,11 @@ public class Controller {
                 System.out.println("d - Move RIGHT");
                 System.out.println("/exit - Close game");
             }else if(cont.equals("m")){
-                Game.littleWorld.printWorld();
-                System.out.println("Map is closed.");
+                System.out.println("'H' - Hero");
+                System.out.println("'TM' - Tradesman");
+                //System.out.println("'G' - Goblin");
+                //System.out.println("'S' - Skeleton");
+                //System.out.println("'A' - Artifact");
             }else if(cont.equals("i")){
                 if(Inventory.inventory.isEmpty()){
                     System.out.println("Inventory is empty!");

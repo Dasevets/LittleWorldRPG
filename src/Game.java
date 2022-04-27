@@ -41,6 +41,7 @@ public class Game {
         }
         System.out.println(hero.toString());
         System.out.println("/help for to view commands.");
+        System.out.println("'H' - this is you, Hero!");
         littleWorld.printWorld();
         Controller.control();
     }
