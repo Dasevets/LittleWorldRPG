@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class LittleWorld {
 
     static Object[][] world = setWorld();
@@ -30,6 +34,17 @@ public class LittleWorld {
         // задаем место спауна игрока
         map[Controller.pointHX][Controller.pointHY] = "H";
 
+        // раскидываем артефакты по полю
+        Artifact.setArtifact(); // получаем координаты при помощи math.random
+        for (int i  = 0; i < 12; i = i+2) {
+            map[Artifact.coordArt.get(i)][Artifact.coordArt.get(i + 1)] = "A"; // передаем координаты на карту
+//            System.out.println(Artifact.coordArt.get(i) + " " + Artifact.coordArt.get(i + 1));
+        }
+
+//        for (int i  = 0; i < Artifact.coordArt.size(); i++) {
+//
+//            System.out.print(Artifact.coordArt.get(i) + " ");
+//        }
 
         return map;
     }
@@ -39,7 +54,6 @@ public class LittleWorld {
     public void printWorld(){
 
         //задаем место положение торговца на карте(TM - tradesman)
-
         world[xTM][yTM] = "TM";
 
         //распечатываем карту в консоль
@@ -49,6 +63,7 @@ public class LittleWorld {
             }
             System.out.println();
         }
+        //System.out.println(LittleWorld.world[Controller.pointHX][Controller.pointHY].toString());
     }
 
 

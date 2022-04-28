@@ -17,6 +17,13 @@ public class Controller {
                 Tradesman.shop();
             }
 
+            for(int i =0; i<12; i+=2) { // когда заходим на клетку артефакта, автоматичсески подбираем его, можем увидеть в инвентаре
+                if ((pointHX == Artifact.coordArt.get(i)) && (pointHY == Artifact.coordArt.get(i+1))) {
+                    Inventory.artefacts.add(new Item("Artifact", 0, 0, 0, 30));
+                    System.out.println("You picked up an artifact!");
+                }
+            }
+
             switch (cont) {
                 case "/help":
                     System.out.println("m - Map legend");
@@ -33,13 +40,14 @@ public class Controller {
                     System.out.println("'TM' - Tradesman");
                     //System.out.println("'G' - Goblin");
                     //System.out.println("'S' - Skeleton");
-                    //System.out.println("'A' - Artifact");
+                    System.out.println("'A' - Artifact");
                     break;
                 case "i":
-                    if (Inventory.inventory.isEmpty()) {
+                    if (Inventory.inventory.isEmpty() && Inventory.artefacts.isEmpty()) {
                         System.out.println("Inventory is empty!");
                     } else {
                         Inventory.inventory.forEach(item -> System.out.println(item.toString()));
+                        Inventory.artefacts.forEach(item -> System.out.println(item.toString()));
                     }
                     break;
                 case "j":

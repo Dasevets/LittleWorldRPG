@@ -6,7 +6,7 @@ import java.util.List;
 public class Inventory {
 
     static List<Item> inventory = new ArrayList<>();
-
+    static List<Item> artefacts = new ArrayList<>();
     static int armorPoint;
     static Item helmet = null; //шлем
     static Item armor = null;  // броня

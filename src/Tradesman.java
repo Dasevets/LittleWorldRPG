@@ -8,6 +8,7 @@ public class Tradesman {
     public static void shop(){
 
         System.out.println("Select the desired item and enter its number");
+        System.out.println("Enter to sale artefacts - /sale");
         System.out.println("Enter to exit - /back\n");
 
 
@@ -33,12 +34,26 @@ public class Tradesman {
                 Move.moveUp();
                 Controller.control();
                 break;
+            }else if(shopControl.equals("/sale")){ // продаем артефакты, сразу все что есть в инвентаре, сразу видим сколько денег принесло, и можем купить снаряжение
+                int amt = Inventory.artefacts.size();
+                try {
+                    Game.hero.setMoney(amt * Inventory.artefacts.get(0).price);
+                    System.out.println("Artifacts sold!");
+                    System.out.println("You received: " + amt * Inventory.artefacts.get(0).price + " GOLD");
+                    Inventory.artefacts.clear(); // очищаем массив который хранил артефакты
+                    shop(); // перезапускаем магазин для дальнейшего взаимодействия
+                }catch (NullPointerException e){  // обработка на случай если пытаемся продать артефакты которых нет
+                    System.out.println("You have not artifacts!");
+                    shop();
+                }
+
             }else {
                 try {
                     int index = Integer.parseInt(shopControl);
-                    int gold = Game.hero.getMoney();
-                    if(gold > store.get(index).price) {
-                        Inventory.inventory.add(store.get(index));
+                    int gold = Game.hero.getMoney(); // получаем текущее значение золота у игрока
+                    if(gold > store.get(index).price) { // если хватает золота
+                        Inventory.inventory.add(store.get(index)); // помещаем вещь в инвентарь
+                        shop();
                     }else {
                         System.out.println("Not enough money");
                         shop();
