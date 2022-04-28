@@ -7,7 +7,7 @@ public class Inventory {
 
     static List<Item> inventory = new ArrayList<>();
     static List<Item> artefacts = new ArrayList<>();
-    static int armorPoint;
+    static int armorPoint = 0;
     static Item helmet = null; //шлем
     static Item armor = null;  // броня
     static Item shoes = null;  // обувь
@@ -15,8 +15,20 @@ public class Inventory {
     static Item shield = null;  // щит
     static Item weapon = null;  // оружие
 
-    public static void sumArmorPoint(){
-        armorPoint = helmet.defence + armor.defence + shoes.defence + shield.defence;
+    public static int sumArmorPoint(){
+        if(armor != null) {
+            armorPoint += armor.defence;
+        }
+        if(helmet != null){
+            armorPoint += helmet.defence;
+        }
+        if (shoes != null){
+            armorPoint += shoes.defence;
+        }
+        if(shield != null){
+            armorPoint += shield.defence;
+        }
+        return armorPoint;
     }
 
 

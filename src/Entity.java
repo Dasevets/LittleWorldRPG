@@ -24,7 +24,5 @@ public abstract class Entity {
         return ap;
     }
 
-    public void attack(){
 
-    }
 }

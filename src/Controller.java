@@ -24,6 +24,24 @@ public class Controller {
                 }
             }
 
+            if((pointHX == Skeleton.sX) && (pointHY == Skeleton.sY)){ // бой со скелетом
+                Skeleton skeleton = new Skeleton(50, 50,25);
+                System.out.println("You started the battle with the skeleton");
+                System.out.print("Skeleton ");
+                System.out.println(skeleton);
+                System.out.println(Game.hero.toString());
+                Fight.fight(skeleton);
+            }
+            if((pointHX == Goblin.gX) && (pointHY == Goblin.gY)){
+                Goblin goblin = new Goblin(75, 75, 100);
+                System.out.println("You started the battle with the goblin");
+                System.out.print("Goblin ");
+                System.out.println(goblin);
+                System.out.println(Game.hero.toString());
+                Fight.fight(goblin);
+            }
+
+
             switch (cont) {
                 case "/help":
                     System.out.println("m - Map legend");
@@ -38,8 +56,8 @@ public class Controller {
                 case "m":
                     System.out.println("'H' - Hero");
                     System.out.println("'TM' - Tradesman");
-                    //System.out.println("'G' - Goblin");
-                    //System.out.println("'S' - Skeleton");
+                    System.out.println("'G' - Goblin");
+                    System.out.println("'S' - Skeleton");
                     System.out.println("'A' - Artifact");
                     break;
                 case "i":
@@ -70,6 +88,10 @@ public class Controller {
                     break;
             }
         }
+    }
+
+    public void died(){
+
     }
 }
 

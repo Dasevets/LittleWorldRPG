@@ -6,7 +6,7 @@ public class Hero extends Entity{
     private int damagePoint = damage(); // очки наносимого урона
     private double critical = 0.05; // вероятность критического урона
 
-    int armorPoint = Inventory.armorPoint; // очки брони, считаются в инвентаре в зависимости от надетых вещей
+    static int armorPoint = Inventory.sumArmorPoint(); // очки брони, считаются в инвентаре в зависимости от надетых вещей
 
 
     public Hero(int hp, int strength, int agility) {
