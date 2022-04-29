@@ -7,6 +7,7 @@ public class Controller {
     static int pointHX = Move.pointHeroX();
     static int pointHY = Move.pointHeroY();
 
+
     public static void control() {
 
 
@@ -55,7 +56,9 @@ public class Controller {
                     System.out.println("s - Move DOWN");
                     System.out.println("a - Move LEFT");
                     System.out.println("d - Move RIGHT");
+                    System.out.println("'h' - First aid kit");
                     System.out.println("/exit - Close game");
+
                     break;
                 case "m":
                     System.out.println("'H' - Hero");
@@ -90,6 +93,28 @@ public class Controller {
                     break;
                 case "d":  // вправо
                     Move.move(Controller.pointHX, Controller.pointHY + 1);
+                    break;
+                case "h": //применить аптечку
+                    if (Game.hero.hp < Game.HP) { //проверяем героя на количество здоровья
+                        for (Item item : Inventory.inventory) {
+                            try {
+                                if (item.heal != 0) { // проверяем наличие аптечки в инвентаре
+                                    Game.hero.hp += item.heal; //увеличиваем здоровье за счет аптечки
+                                    if(Game.hero.hp > Game.HP){ // если аптечка "перелечила", убираем лишнее
+                                        Game.hero.hp = Game.HP;
+                                    }
+                                    Inventory.inventory.remove(item); //удаляем аптечку
+                                    break;
+                                } else {
+                                    System.out.println("You have not heal!");
+                                }
+                            } catch (NullPointerException e) {
+                                System.out.println("Inventory is empty!");
+                            }
+                        }
+                    }else{
+                        System.out.println("Full health");
+                    }
                     break;
             }
         }

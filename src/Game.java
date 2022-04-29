@@ -4,6 +4,7 @@ public class Game {
 
     public static  Hero hero;
     public static LittleWorld littleWorld = new LittleWorld();
+    static int HP;
 
     public static void game(){
 
@@ -31,6 +32,7 @@ public class Game {
             case 3 -> Class.killer(nameHero);
         }
         System.out.println(hero.toString());
+        HP = Game.hero.hp;
         System.out.println("/help for to view commands.");
         System.out.println("'H' - this is you, Hero!");
         System.out.println("To start trading / fighting, stand on the corresponding sign and press enter");
