@@ -18,7 +18,7 @@ public class Game {
         System.out.println(salute);
 
 
-        System.out.println("What's you name, stranger?");
+        System.out.println("What's you name, wanderer?");
         nameHero = scanner.nextLine();
         System.out.println("Choose you game class: ");
         System.out.println("1. Tank (HP 150, STR 75, AGL 25)");
@@ -33,6 +33,8 @@ public class Game {
         System.out.println(hero.toString());
         System.out.println("/help for to view commands.");
         System.out.println("'H' - this is you, Hero!");
+        System.out.println("To start trading / fighting, stand on the corresponding sign and press enter");
+        System.out.println("Good game, wanderer!");
         littleWorld.printWorld();
         Controller.control();
     }
