@@ -31,7 +31,8 @@ public class Tradesman {
             String shopControl = scanner.nextLine();
 
             if(shopControl.equals("/back")){
-                Move.moveUp();
+                //Move.moveUp();
+                Move.move(Controller.pointHX - 1, Controller.pointHY);
                 Controller.control();
                 break;
             }else if(shopControl.equals("/sale")){ // продаем артефакты, сразу все что есть в инвентаре, сразу видим сколько денег принесло, и можем купить снаряжение
@@ -53,6 +54,7 @@ public class Tradesman {
                     int gold = Game.hero.getMoney(); // получаем текущее значение золота у игрока
                     if(gold > store.get(index).price) { // если хватает золота
                         Inventory.inventory.add(store.get(index)); // помещаем вещь в инвентарь
+                        Game.hero.setMoney(-store.get(index).price);
                         shop();
                     }else {
                         System.out.println("Not enough money");

@@ -5,11 +5,12 @@ public class Hero extends Entity{
     private int money; // количество денег
     private int damagePoint = damage(); // очки наносимого урона
     private double critical = 0.05; // вероятность критического урона
+    private int level = 1;
 
     static int armorPoint = Inventory.sumArmorPoint(); // очки брони, считаются в инвентаре в зависимости от надетых вещей
 
 
-    public Hero(int hp, int strength, int agility) {
+    public Hero(int hp, int strength, int agility) { // конструктор героя
 
         super(hp, strength, agility);
 
@@ -20,16 +21,30 @@ public class Hero extends Entity{
     } // устанавливаем имя
 
     public void setMoney(int money) { // установить кол-во денег
-        this.money = money;
+        this.money += money;
     }
 
     public int getMoney() { // получить кол-во денег
         return money;
     }
 
+    public void setExperience(int experience) { // изменяем количество опыта
+        this.experience += experience;
+        if((this.experience % 100) == 0){
+            level++;
+            System.out.println("New level!" + level); // увеличиваем и выводи уровень, увеличиваем все показатели с каждым уровнем
+            critical += 0.04;
+            strength += 5;
+            hp += 10;
+            agility += 5;
+            System.out.println(Game.hero.toString());
+        }
+    }
+
+
     @Override
     public String toString(){
-        return name + ", HP: " + hp + ", STR: " + strength + ", AGL: " + agility + ", EXP: " + experience + ", GOLD: " + money;
+        return name + ", HP: " + hp + ", STR: " + strength + ", AGL: " + agility + ", EXP: " + experience + ", GOLD: " + money + ", LVL: " + level;
     }
 
     //переопределяем назначение наносимого урона.

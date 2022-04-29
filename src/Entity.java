@@ -3,7 +3,6 @@ public abstract class Entity {
     int hp;
     int strength;
     int agility;
-    int damagePoint = damage();
 
     public Entity(int hp, int strength, int agility){
         this.hp = hp;

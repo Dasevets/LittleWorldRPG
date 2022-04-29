@@ -7,37 +7,41 @@ public class Controller {
     static int pointHX = Move.pointHeroX();
     static int pointHY = Move.pointHeroY();
 
-    public static void control(){
+    public static void control() {
 
-        label:
-        while (true){
+
+        while (true) {
             String cont = scanner.nextLine();
 
-            if((pointHX == LittleWorld.xTM) && (pointHY == LittleWorld.yTM)){ // когда заходим на клетку торговца, перемещаемся в магазин
+            if ((pointHX == LittleWorld.xTM) && (pointHY == LittleWorld.yTM)) { // когда заходим на клетку торговца, перемещаемся в магазин
                 Tradesman.shop();
             }
 
-            for(int i =0; i<12; i+=2) { // когда заходим на клетку артефакта, автоматичсески подбираем его, можем увидеть в инвентаре
-                if ((pointHX == Artifact.coordArt.get(i)) && (pointHY == Artifact.coordArt.get(i+1))) {
+            for (int i = 0; i < 12; i += 2) { // когда заходим на клетку артефакта, автоматичсески подбираем его, можем увидеть в инвентаре
+                if ((pointHX == Artifact.coordArt.get(i)) && (pointHY == Artifact.coordArt.get(i + 1))) {
                     Inventory.artefacts.add(new Item("Artifact", 0, 0, 0, 30));
                     System.out.println("You picked up an artifact!");
                 }
             }
 
-            if((pointHX == Skeleton.sX) && (pointHY == Skeleton.sY)){ // бой со скелетом
-                Skeleton skeleton = new Skeleton(50, 50,25);
+            if ((pointHX == Skeleton.sX) && (pointHY == Skeleton.sY)) { // бой со скелетом
+                Skeleton skeleton = new Skeleton(50, 40, 25);
                 System.out.println("You started the battle with the skeleton");
                 System.out.print("Skeleton ");
                 System.out.println(skeleton);
                 System.out.println(Game.hero.toString());
+                Skeleton.setsX((int) ((Math.random() * 4) + 3));
+                Skeleton.setsY((int) ((Math.random() * 4) + 3));
                 Fight.fight(skeleton);
             }
-            if((pointHX == Goblin.gX) && (pointHY == Goblin.gY)){
-                Goblin goblin = new Goblin(75, 75, 100);
+            if ((pointHX == Goblin.gX) && (pointHY == Goblin.gY)) {
+                Goblin goblin = new Goblin(75, 60, 100);
                 System.out.println("You started the battle with the goblin");
                 System.out.print("Goblin ");
                 System.out.println(goblin);
                 System.out.println(Game.hero.toString());
+                Goblin.setgX((int) ((Math.random() * 4) + 14));
+                Goblin.setgY((int) ((Math.random() * 4) + 14));
                 Fight.fight(goblin);
             }
 
@@ -73,69 +77,61 @@ public class Controller {
                     break;
                 case "/exit":
                     System.out.println("GAME OVER");
-                    break label;
+                    System.exit(0);
+                    break;
                 case "w":  // вперед
-                    Move.moveUp();
+                    Move.move(Controller.pointHX - 1, Controller.pointHY);
                     break;
                 case "s":  // назад
-                    Move.moveDown();
+                    Move.move(Controller.pointHX + 1, Controller.pointHY);
                     break;
                 case "a":  // влево
-                    Move.moveLeft();
+                    Move.move(Controller.pointHX, Controller.pointHY - 1);
                     break;
                 case "d":  // вправо
-                    Move.moveRight();
+                    Move.move(Controller.pointHX, Controller.pointHY + 1);
                     break;
             }
         }
     }
-
-    public void died(){
-
-    }
 }
 
 
-
-class Move{
+class Move {
 
     // задаем изначальное место спауна героя
-    public static int pointHeroX(){
-        int xH = (int)((Math.random() * 5)+2); // строки
+    public static int pointHeroX() {
+        int xH = (int) ((Math.random() * 5) + 2); // строки
         return xH;
     }
-    public static int pointHeroY(){
-        int yH = (int)((Math.random() * 5)+15); // столбцы
+
+    public static int pointHeroY() {
+        int yH = (int) ((Math.random() * 5) + 15); // столбцы
         return yH;
     }
 
 
-    // метода движения героя по полю
-    public static void moveUp(){
+    // общий метод движения героя по полю
+    public static void move(int x, int y) {
         LittleWorld.world[Controller.pointHX][Controller.pointHY] = ".";
-        Controller.pointHX -= 1;
-        LittleWorld.world[Controller.pointHX][Controller.pointHY] = "H";
-        Game.littleWorld.printWorld();
+        borderCheck(Controller.pointHX, Controller.pointHY);
+        Controller.pointHX = x;
+        Controller.pointHY = y;
+        try {
+            LittleWorld.world[Controller.pointHX][Controller.pointHY] = "H";
+            Game.littleWorld.printWorld();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("You fell off the edge of the world!");
+            System.out.println("YOU DIED!");
+            System.exit(0);
+        }
     }
 
-    public static void moveDown(){
-        LittleWorld.world[Controller.pointHX][Controller.pointHY] = ".";
-        Controller.pointHX += 1;
-        LittleWorld.world[Controller.pointHX][Controller.pointHY] = "H";
-        Game.littleWorld.printWorld();
-    }
+    public static void borderCheck(int x, int y) {
+        if ((x <= 2) || (x >= 19) || (y <= 2) || (y >= 19)) {
+            System.out.println("You have come too close to the edge of the world!");
+            System.out.println("Leave or die!");
 
-    public static void moveLeft(){
-        LittleWorld.world[Controller.pointHX][Controller.pointHY] = ".";
-        Controller.pointHY -= 1;
-        LittleWorld.world[Controller.pointHX][Controller.pointHY] = "H";
-        Game.littleWorld.printWorld();
-    }
-
-    public static void moveRight(){
-        LittleWorld.world[Controller.pointHX][Controller.pointHY] = ".";
-        Controller.pointHY += 1;
-        LittleWorld.world[Controller.pointHX][Controller.pointHY] = "H";
-        Game.littleWorld.printWorld();
+        }
     }
 }

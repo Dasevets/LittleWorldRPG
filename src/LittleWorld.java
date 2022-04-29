@@ -7,8 +7,7 @@ public class LittleWorld {
     static Object[][] world = setWorld();
     static int xTM = (int) ((Math.random() * 6) + 7);
     static int yTM = (int) ((Math.random() * 6) + 7);
-
-
+    int count = 0;
 
 
     public static Object[][] setWorld() {
@@ -38,7 +37,6 @@ public class LittleWorld {
         map[Controller.pointHX][Controller.pointHY] = "H";
 
 
-
         // задаем место спауна мобов
         // создаем скелет
         //Skeleton skeleton = new Skeleton(25, 15,5);
@@ -66,6 +64,7 @@ public class LittleWorld {
 
     public void printWorld() {
 
+
         //задаем место положение торговца на карте(TM - tradesman)
         world[xTM][yTM] = "TM";
 
@@ -76,7 +75,39 @@ public class LittleWorld {
             }
             System.out.println();
         }
+        count++;
+        if ((count % 5) == 0) {
+            for (int i = 0; i < world.length; i++) {
+                for (int j = 0; j < world[i].length; j++) {
+                    if(world[i][j].equals("S")){
+                        world[i][j] = ".";
+                    }
+                    if(world[i][j].equals("G")){
+                        world[i][j] = ".";
+                    }
+                }
+            }
+
+            // перемещаем мобов
+            LittleWorld.mobs();
+        }
         //System.out.println(LittleWorld.world[Controller.pointHX][Controller.pointHY].toString());
+    }
+
+    public static void mobs() {
+        // двигаем мобов
+        // создаем скелет
+        //Skeleton skeleton = new Skeleton(25, 15,5);
+        Skeleton.setsX((int) ((Math.random() * 4) + 3));
+        Skeleton.setsY((int) ((Math.random() * 4) + 3));
+        world[Skeleton.sX][(Skeleton.sY)] = "S"; // назначаем точку спауна
+
+
+        // создаем гоблина
+        //Goblin goblin = new Goblin(50, 15, 25);
+        Goblin.setgX((int) ((Math.random() * 4) + 14));
+        Goblin.setgY((int) ((Math.random() * 4) + 14));
+        world[Goblin.gX][Goblin.gY] = "G"; // назначаем точку спауна
     }
 
 

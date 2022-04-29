@@ -1,17 +1,14 @@
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
 
     public static  Hero hero;
-    public static LittleWorld littleWorld = new LittleWorld();;
+    public static LittleWorld littleWorld = new LittleWorld();
 
     public static void game(){
 
         String nameHero;
         int gameClass;
-        //LittleWorld littleWorld = new LittleWorld();
 
         Scanner scanner = new Scanner(System.in);
         StringBuilder salute = new StringBuilder("   Welcome to Little World!");
