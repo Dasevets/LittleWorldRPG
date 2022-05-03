@@ -33,7 +33,8 @@ public class Controller {
                 System.out.println(Game.hero.toString());
                 Skeleton.setsX((int) ((Math.random() * 4) + 3));
                 Skeleton.setsY((int) ((Math.random() * 4) + 3));
-                Fight.fight(skeleton);
+                //Fight.fight(skeleton);
+                new Fight(Game.hero, skeleton).fight();
             }
             if ((pointHX == Goblin.gX) && (pointHY == Goblin.gY)) {
                 Goblin goblin = new Goblin(75, 60, 100);
@@ -43,7 +44,8 @@ public class Controller {
                 System.out.println(Game.hero.toString());
                 Goblin.setgX((int) ((Math.random() * 4) + 14));
                 Goblin.setgY((int) ((Math.random() * 4) + 14));
-                Fight.fight(goblin);
+                //Fight.fight(goblin);
+                new Fight(Game.hero, goblin).fight();
             }
 
 
